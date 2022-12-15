@@ -11,16 +11,18 @@ pipeline {
     stages {
 
         stage('检出最新代码') {
-            echo "---------------------------------${project}开始检出最新代码---------------------------------"
             steps {
-                try {
-                    def COMMIT_INFO = sh(script: 'git show', returnStdout: true)
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], browser: [$class: 'GithubWeb', repoUrl: 'https://github.com/cuigw001/springboot001'], extensions: [], userRemoteConfigs: [[credentialsId: '82343b80-e151-4438-8f70-62b551189331', url: 'https://github.com/cuigw001/springboot001.git']]])
-                    echo "${project}检出最新代码成功,代码变更如下："
-                    echo "${COMMIT_INFO}"
-                } catch (e) {
-                    echo "${project}检出最新代码失败"
-                    throw e
+                echo "---------------------------------${project}开始检出最新代码---------------------------------"
+                script {
+                    try {
+                        def COMMIT_INFO = sh(script: 'git show', returnStdout: true)
+                        checkout([$class: 'GitSCM', branches: [[name: '*/main']], browser: [$class: 'GithubWeb', repoUrl: 'https://github.com/cuigw001/springboot001'], extensions: [], userRemoteConfigs: [[credentialsId: '82343b80-e151-4438-8f70-62b551189331', url: 'https://github.com/cuigw001/springboot001.git']]])
+                        echo "${project}检出最新代码成功,代码变更如下："
+                        echo "${COMMIT_INFO}"
+                    } catch (e) {
+                        echo "${project}检出最新代码失败"
+                        throw e
+                    }
                 }
             }
         }
