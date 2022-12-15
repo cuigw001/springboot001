@@ -34,7 +34,7 @@ pipeline {
                     echo "代码作者：【${COMMIT_EMAIL}】"
                     try {
                         def packageResult = sh(script: 'mvn -U -am clean package -Dmaven.test.skip=true | grep -c "BUILD SUCCESS"', returnStdout: true)
-                        echo "${project}打包成功:${packageResult}"
+                        echo "${project}打包成功"
                     } catch (e) {
                         echo "${project}打包失败"
                         throw e
