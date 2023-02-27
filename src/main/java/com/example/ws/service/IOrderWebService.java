@@ -1,6 +1,8 @@
-package com.example.springboot001.service;
+package com.example.ws.service;
 
-import com.example.springboot001.entity.Order;
+import com.example.ws.entity.ET_RETURN;
+import com.example.ws.entity.IT_DATA;
+import com.example.ws.entity.Order;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -8,7 +10,7 @@ import java.util.List;
 
 @WebService(
         name = "OrderWebService", // 暴露服务名称
-        targetNamespace = "http://service.springboot001.example.com"// 命名空间,一般是接口的包名倒序
+        targetNamespace = "http://service.ws.example.com"// 命名空间,一般是接口的包名倒序
 )
 public interface IOrderWebService {
 
@@ -19,9 +21,12 @@ public interface IOrderWebService {
     //exclude声明该方法不发布
     //@WebMethod(exclude = true)
     //String greeting(String name);
-    @WebMethod
+   /* @WebMethod(exclude = true)
     String getNo(Long userId);
 
+    @WebMethod(exclude = true)
+    List<Order> getOrder(Order order);*/
+
     @WebMethod
-    List<Order> getOrder(Order order);
+    ET_RETURN syncData(List<IT_DATA> orders);
 }

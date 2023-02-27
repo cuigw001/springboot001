@@ -1,6 +1,6 @@
-package com.example.springboot001.service;
+package com.example.ws.service;
 
-import com.example.springboot001.entity.Order;
+import com.example.ws.entity.Order;
 
 public interface IOrderService {
     String getNo(Long userId);

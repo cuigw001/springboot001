@@ -1,7 +1,7 @@
-package com.example.springboot001.service.impl;
+package com.example.ws.service.impl;
 
-import com.example.springboot001.entity.Order;
-import com.example.springboot001.service.IOrderService;
+import com.example.ws.entity.Order;
+import com.example.ws.service.IOrderService;
 import org.springframework.stereotype.Service;
 
 @Service

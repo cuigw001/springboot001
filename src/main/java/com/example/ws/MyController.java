@@ -1,4 +1,4 @@
-package com.example.springboot001;
+package com.example.ws;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,11 +1,12 @@
-package com.example.springboot001.config;
+package com.example.ws.config;
 
-import com.example.springboot001.service.impl.OrderWebService;
+import com.example.ws.service.impl.OrderWebService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBus;
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,6 +18,9 @@ public class CxfConfig {
     @Autowired
     private OrderWebService orderWebService;
 
+    @Value("${server.port}")
+    private String port;
+    private static final String path = "/ws";
     /**
      * Apache CXF 核心架构是以BUS为核心，整合其他组件。
      * Bus是CXF的主干, 为共享资源提供一个可配置的场所，作用类似于Spring的ApplicationContext，这些共享资源包括
@@ -57,13 +61,12 @@ public class CxfConfig {
     public Endpoint userServiceEndpoint() {
         log.info("web service 服务发布");
         //这里指定的端口不能跟应用的端口冲突, 单独指定
-        String path = "http://127.0.0.1:9090/ws";
+        //String path = "http://localhost:9090/ws";
 
         EndpointImpl userEndpoint = new EndpointImpl(springBus(), orderWebService);
         userEndpoint.publish(path);
 
-        log.info("服务成功，path: {}", path);
-        log.info(String.format("在线的wsdl：%s?wsdl", path));
+        log.info("在线的wsdl:http://localhost:{}/services{}?wsdl",port,path);
         return userEndpoint;
     }
 }
