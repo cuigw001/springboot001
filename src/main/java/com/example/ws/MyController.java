@@ -11,6 +11,6 @@ public class MyController {
 
     @GetMapping(value = "/list", name = "获取配置列表")
     public String list() {
-        return "abckdef";
+        return "abckdef0001";
     }
 }
